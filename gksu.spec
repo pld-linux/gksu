@@ -13,7 +13,7 @@ BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libgksu-devel >= 1.2.3
 BuildRequires:	libgksuui-devel >= 1.0
-BuildRequires:	gtk+2-devel >= 2.2
+BuildRequires:	gtk+2-devel >= 2:2.2
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	libtool
 Requires:	/bin/su
