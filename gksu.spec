@@ -1,14 +1,13 @@
 Summary:	GKsu is a GTK+ frontend to the su program
 Summary(pl):	GKsu to nak³adka graficzna na program su
 Name:		gksu
-Version:	1.0.3
+Version:	1.0.4
 Release:	1
 License:	GPL
 Vendor:		Gustavo Noronha Silva <kov@debian.org>
 Group:		Applications/System
 Source0:	http://people.debian.org/~kov/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	1cd54a0eb983732b3cf4df188a1922d8
-Patch0:		%{name}-doc_build.patch
+# Source0-md5:	b8e38f8eda1ce32a299fcaa5c70390f5
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -50,7 +49,6 @@ Statyczna biblioteka gksu.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
