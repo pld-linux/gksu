@@ -8,17 +8,17 @@ Vendor:		Gustavo Noronha Silva <kov@debian.org>
 Group:		Applications/System
 Source0:	http://savannah.nongnu.org/download/%{name}/%{name}-%{version}.tar.gz
 URL:		http://www.nongnu.org/gksu/
-Requires:	coreutils
 BuildRequires:	gtk+2-devel >= 2.2
 BuildRequires:	gdk-pixbuf-devel >= 0.22
 BuildRequires:	pango-devel
+Requires:	/bin/su
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 GKsu is a GTK+ frontend to the su program.
 
 %description -l pl
-GKsu to nak³adka graficzna an program su.
+GKsu to graficzna nak³adka na program su.
 
 %prep
 %setup -q
