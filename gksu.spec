@@ -65,20 +65,17 @@ Statyczna biblioteka gksu.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT%{_applnkdir}/System
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-#mv $RPM_BUILD_ROOT%{_datadir}/gnome/apps/System/*desktop $RPM_BUILD_ROOT%{_applnkdir}/System
 
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	  -p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
