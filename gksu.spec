@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Vendor:		Gustavo Noronha Silva <kov@debian.org>
 Group:		Applications/System
-Source0:	http://people.debian.org/~kov/gksu/gksu1.2/%{name}-%{version}.tar.gz
+Source0:	http://people.debian.org/~kov/gksu/gksu/%{name}-%{version}.tar.gz
 # Source0-md5:	564504badbd41fbe554a8133d07b5e94
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	autoconf >= 2.57
