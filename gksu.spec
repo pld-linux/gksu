@@ -1,5 +1,5 @@
 Summary:	GKsu is a GTK+ frontend to the su program
-Summary(pl.UTF-8):   GKsu to nakładka graficzna na program su
+Summary(pl.UTF-8):	GKsu to nakładka graficzna na program su
 Name:		gksu
 Version:	1.2.2
 Release:	1
