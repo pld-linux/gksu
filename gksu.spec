@@ -14,8 +14,10 @@ URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.2
 BuildRequires:	gtk-doc >= 1.0
+BuildRequires:	intltool
 BuildRequires:	libgksu-devel >= 2.0
 BuildRequires:	libtool
 %{?with_nautilus:BuildRequires:	nautilus-devel}
