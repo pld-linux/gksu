@@ -105,6 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gksu
 %attr(755,root,root) %{_datadir}/gksu/gksu-migrate-conf.sh
 
+%if %{with nautilus}
 %files nautilus
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_libdir}/nautilus/extensions-1.0/libnautilus-gksu.so
@@ -117,3 +118,4 @@ rm -rf $RPM_BUILD_ROOT
 %files nautilus-static
 %defattr(644,root,root,755)
 %{_libdir}/nautilus/extensions-1.0/libnautilus-gksu.a
+%if
