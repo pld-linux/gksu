@@ -1,3 +1,4 @@
+#
 # Conditional builds:
 %bcond_without	nautilus	# build without nautilus extensions
 #
@@ -37,38 +38,16 @@ GKsu to graficzna nakładka na program su.
 Summary:	Gksu plugin for nautilus
 Summary(pl.UTF-8):	Wtyczka gksu dla nautilusa
 Group:		X11/Applications
-Requires:	%{name} = version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Requires:	nautilus
+Obsoletes:	gksu-nautilus-devel
+Obsoletes:	gksu-nautilus-static
 
 %description nautilus
 Gksu plugin for nautilus.
 
 %description nautilus -l pl.UTF-8
 Wtyczka gksu dla nautilusa.
-
-%package nautilus-devel
-Summary:	Libtool library for nautilus extension library
-Summary(pl.UTF-8):	Biblioteka libtoola dla wtyczki gksu dla nautilusa
-Group:		Development/Libraries
-Requires:	%{name}-nautilus = %{version}-%{release}
-
-%description nautilus-devel
-Libtool library for nautilus extension library.
-
-%description nautilus-devel -l pl.UTF-8
-Biblioteka libtoola dla wtyczki gksu dla nautilusa.
-
-%package nautilus-static
-Summary:	Static library for nautilus extension library
-Summary(pl.UTF-8):	Statyczna biblioteka dla wtyczki gksu dla nautilusa
-Group:		Development/Libraries
-Requires:	%{name}-nautilus-devel = %{version}-%{release}
-
-%description nautilus-static
-Static library for nautilus extension library.
-
-%description nautilus-static -l pl.UTF-8
-Statyczna biblioteka dla wtyczki gksu dla nautilusa.
 
 %prep
 %setup -q
@@ -79,6 +58,7 @@ Statyczna biblioteka dla wtyczki gksu dla nautilusa.
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-static \
 	--enable-gtk-doc \
 	%{!?with_nautilus: --disable-nautilus-extension} \
 	--with-html-dir=%{_gtkdocdir}
@@ -90,6 +70,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-2.0/*.la
 
 #%find_lang %{name}
 
@@ -111,13 +93,4 @@ rm -rf $RPM_BUILD_ROOT
 %files nautilus
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_libdir}/nautilus/extensions-1.0/libnautilus-gksu.so
-
-%files nautilus-devel
-%defattr(644,root,root,755)
-%{_libdir}/nautilus/extensions-1.0/libnautilus-gksu.la
-
-
-%files nautilus-static
-%defattr(644,root,root,755)
-%{_libdir}/nautilus/extensions-1.0/libnautilus-gksu.a
-%if
+%endif
