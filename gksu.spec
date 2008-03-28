@@ -21,12 +21,15 @@ BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	intltool
 BuildRequires:	libgksu-devel >= 2.0
 BuildRequires:	libtool
+%{?with_nautilus:BuildRequires:	gnome-vfs2-devel}
 %{?with_nautilus:BuildRequires:	nautilus-devel}
 BuildRequires:	pkgconfig
 Requires:	/bin/su
 Obsoletes:	gksu-devel
 Obsoletes:	gksu-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		specflags	`pkg-config --cflags gnome-vfs-2.0`
 
 %description
 GKsu is a GTK+ frontend to the su program.
