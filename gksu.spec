@@ -30,6 +30,7 @@ Obsoletes:	gksu-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	`pkg-config --cflags gnome-vfs-2.0`
+%define		nautilus_extensiondir %( pkg-config --variable=extensiondir libnautilus-extension )
 
 %description
 GKsu is a GTK+ frontend to the su program.
@@ -72,6 +73,7 @@ Wtyczka gksu dla nautilusa.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
+	nautilus_extensiondir=%{nautilus_extensiondir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # fix gksudo man link
@@ -98,5 +100,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with nautilus}
 %files nautilus
 %defattr(644,root,root,755)
-%attr (755,root,root) %{_libdir}/nautilus/extensions-1.0/libnautilus-gksu.so
+%attr (755,root,root) %{nautilus_extensiondir}/libnautilus-gksu.so
 %endif
