@@ -6,9 +6,9 @@ Summary:	GKsu is a GTK+ frontend to the su program
 Summary(pl.UTF-8):	GKsu to nakładka graficzna na program su
 Name:		gksu
 Version:	2.0.0
-Release:	2
+Release:	3
 License:	GPL
-Group:		Applications/System
+Group:		X11/Applications/System
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
 # Source0-md5:	f517302cff6f09e4f2f312c4b618bd40
 URL:		http://www.nongnu.org/gksu/
@@ -16,12 +16,12 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+%{?with_nautilus:BuildRequires:	gnome-vfs2-devel}
 BuildRequires:	gtk+2-devel >= 2:2.2
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	intltool
 BuildRequires:	libgksu-devel >= 2.0
 BuildRequires:	libtool
-%{?with_nautilus:BuildRequires:	gnome-vfs2-devel}
 %{?with_nautilus:BuildRequires:	nautilus-devel}
 BuildRequires:	pkgconfig
 Requires:	/bin/su
@@ -80,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 echo .so man1/gksu.1 > $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-1.0/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-2.0/*.la
 
 %find_lang %{name}
 
@@ -90,10 +90,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
-%attr(755,root,root) %{_bindir}/*
-%{_desktopdir}/*.desktop
-%{_mandir}/man1/*
-%{_pixmapsdir}/*
+%attr(755,root,root) %{_bindir}/gksu
+%attr(755,root,root) %{_bindir}/gksudo
+%{_desktopdir}/gksu.desktop
+%{_mandir}/man1/*.1*
+%{_pixmapsdir}/*.png
 %dir %{_datadir}/gksu
 %attr(755,root,root) %{_datadir}/gksu/gksu-migrate-conf.sh
 
