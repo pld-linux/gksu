@@ -16,14 +16,16 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-%{?with_nautilus:BuildRequires:	gnome-vfs2-devel}
-BuildRequires:	gtk+2-devel >= 2:2.2
+BuildRequires:	gnome-keyring-devel
+BuildRequires:	gnome-vfs2-devel
+BuildRequires:	gtk+2-devel >= 2:2.4
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	intltool
-BuildRequires:	libgksu-devel >= 2.0
+BuildRequires:	libgksu-devel >= 1.9.8
 BuildRequires:	libtool
 %{?with_nautilus:BuildRequires:	nautilus-devel}
 BuildRequires:	pkgconfig
+BuildRequires:	readline-devel
 Requires:	/bin/su
 Obsoletes:	gksu-devel
 Obsoletes:	gksu-static
@@ -82,13 +84,12 @@ echo .so man1/gksu.1 > $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-2.0/*.la
 
-#%%find_lang %{name}
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-#%files -f %{name}.lang
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/gksu
