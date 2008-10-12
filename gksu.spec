@@ -6,7 +6,7 @@ Summary:	GKsu is a GTK+ frontend to the su program
 Summary(pl.UTF-8):	GKsu to nakładka graficzna na program su
 Name:		gksu
 Version:	2.0.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/System
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
@@ -82,12 +82,13 @@ echo .so man1/gksu.1 > $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-2.0/*.la
 
-%find_lang %{name}
+#%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+#%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/gksu
