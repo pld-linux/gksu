@@ -1,5 +1,6 @@
 #
 # Conditional builds:
+%bcond_with	apidocs		# disable gtk-doc (there isn't any)
 %bcond_without	nautilus	# build without nautilus extensions
 #
 Summary:	GKsu is a GTK+ frontend to the su program
@@ -16,23 +17,22 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-keyring-devel
-BuildRequires:	gnome-vfs2-devel
+%{?with_nautilus:BuildRequires:	gnome-vfs2-devel}
 BuildRequires:	gtk+2-devel >= 2:2.4
-BuildRequires:	gtk-doc >= 1.0
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	intltool
 BuildRequires:	libgksu-devel >= 1.9.8
+%{?with_nautilus:BuildRequires:	libgksu-devel >= 2.0.0}
 BuildRequires:	libtool
 %{?with_nautilus:BuildRequires:	nautilus-devel}
 BuildRequires:	pkgconfig
-BuildRequires:	readline-devel
 Requires:	/bin/su
 Obsoletes:	gksu-devel
 Obsoletes:	gksu-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		specflags	`pkg-config --cflags gnome-vfs-2.0`
-%define		nautilus_extensiondir %( pkg-config --variable=extensiondir libnautilus-extension )
+%define		specflags	%( pkg-config --cflags gnome-vfs-2.0 )
+%define		nautilus_extensiondir	%( pkg-config --variable=extensiondir libnautilus-extension )
 
 %description
 GKsu is a GTK+ frontend to the su program.
@@ -65,8 +65,8 @@ Wtyczka gksu dla nautilusa.
 %{__automake}
 %configure \
 	--disable-static \
-	--enable-gtk-doc \
-	%{!?with_nautilus: --disable-nautilus-extension} \
+	%{!?with_apidocs:--disable-gtk-doc} \
+	%{!?with_nautilus:--disable-nautilus-extension} \
 	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
