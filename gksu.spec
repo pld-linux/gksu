@@ -31,8 +31,10 @@ Obsoletes:	gksu-devel
 Obsoletes:	gksu-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		specflags	%( pkg-config --cflags gnome-vfs-2.0 )
+%if %{with nautilus}
+%define		specflags	`pkg-config --cflags gnome-vfs-2.0`
 %define		nautilus_extensiondir	%( pkg-config --variable=extensiondir libnautilus-extension )
+%endif
 
 %description
 GKsu is a GTK+ frontend to the su program.
