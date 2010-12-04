@@ -61,6 +61,7 @@ Wtyczka gksu dla nautilusa.
 %setup -q
 
 %build
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
