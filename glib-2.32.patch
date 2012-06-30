@@ -1,0 +1,12 @@
+diff -uNr gksu-2.0.2~/nautilus-gksu/libnautilus-gksu.c gksu-2.0.2/nautilus-gksu/libnautilus-gksu.c
+--- gksu-2.0.2~/nautilus-gksu/libnautilus-gksu.c	2009-02-23 03:03:37.000000000 +0100
++++ gksu-2.0.2/nautilus-gksu/libnautilus-gksu.c	2012-06-30 17:49:34.060658602 +0200
+@@ -5,7 +5,7 @@
+ #include <string.h>
+ #include <pthread.h>
+ 
+-#include <glib/gkeyfile.h>
++#include <glib.h>
+ #include <gtk/gtk.h>
+ #include <gio/gio.h>
+ #include <libnautilus-extension/nautilus-extension-types.h>

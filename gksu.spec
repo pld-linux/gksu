@@ -7,11 +7,12 @@ Summary:	GKsu is a GTK+ frontend to the su program
 Summary(pl.UTF-8):	GKsu to nakładka graficzna na program su
 Name:		gksu
 Version:	2.0.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
 # Source0-md5:	cacbcac3fc272dce01c6ea38354489e2
+Patch0:		glib-2.32.patch
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
@@ -21,8 +22,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.4
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	intltool
-BuildRequires:	libgksu-devel >= 1.9.8
-%{?with_nautilus:BuildRequires:	libgksu-devel >= 2.0.0}
+BuildRequires:	libgksu-devel >= 2.0.0
 BuildRequires:	libtool
 %{?with_nautilus:BuildRequires:	nautilus-devel}
 BuildRequires:	pkgconfig
@@ -59,6 +59,7 @@ Wtyczka gksu dla nautilusa.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -85,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 echo .so man1/gksu.1 > $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la
+%{?with_nautilus:%{__rm} $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la}
 
 %find_lang %{name}
 
