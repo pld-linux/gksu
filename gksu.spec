@@ -7,33 +7,34 @@ Summary:	GKsu is a GTK+ frontend to the su program
 Summary(pl.UTF-8):	GKsu to nakładka graficzna na program su
 Name:		gksu
 Version:	2.0.2
-Release:	2
-License:	GPL
+Release:	3
+License:	GPL v2+
 Group:		Applications/System
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
 # Source0-md5:	cacbcac3fc272dce01c6ea38354489e2
 Patch0:		glib-2.32.patch
+Patch1:		%{name}-format.patch
 URL:		http://www.nongnu.org/gksu/
-BuildRequires:	GConf2-devel
+BuildRequires:	GConf2-devel >= 2
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	gettext-devel
-%{?with_nautilus:BuildRequires:	gnome-vfs2-devel}
-BuildRequires:	gtk+2-devel >= 2:2.4
+BuildRequires:	gettext-tools
+BuildRequires:	gtk+2-devel >= 2:2.4.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	intltool
-BuildRequires:	libgksu-devel >= 2.0.0
+BuildRequires:	libgksu-devel >= 2.0.8
 BuildRequires:	libtool
 %{?with_nautilus:BuildRequires:	nautilus-devel}
 BuildRequires:	pkgconfig
 Requires:	/bin/su
-Obsoletes:	gksu-devel
-Obsoletes:	gksu-static
+Requires:	gtk+2 >= 2:2.4.0
+Requires:	libgksu >= 2.0.8
+Obsoletes:	gksu-devel < 1.2
+Obsoletes:	gksu-static < 1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %if %{with nautilus}
-%define		specflags	`pkg-config --cflags gnome-vfs-2.0`
-%define		nautilus_extensiondir	%( pkg-config --variable=extensiondir libnautilus-extension )
+%define		nautilus_extensiondir	%(pkg-config --variable=extensiondir libnautilus-extension)
 %endif
 
 %description
@@ -48,8 +49,8 @@ Summary(pl.UTF-8):	Wtyczka gksu dla nautilusa
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	nautilus
-Obsoletes:	gksu-nautilus-devel
-Obsoletes:	gksu-nautilus-static
+Obsoletes:	gksu-nautilus-devel < 2.0.0-1
+Obsoletes:	gksu-nautilus-static < 2.0.0-1
 
 %description nautilus
 Gksu plugin for nautilus.
@@ -60,6 +61,7 @@ Wtyczka gksu dla nautilusa.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__intltoolize}
@@ -83,7 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # fix gksudo man link
-rm -f $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 echo .so man1/gksu.1 > $RPM_BUILD_ROOT%{_mandir}/man1/gksudo.1
 
 %{?with_nautilus:%{__rm} $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la}
@@ -99,8 +101,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gksu
 %attr(755,root,root) %{_bindir}/gksudo
 %{_desktopdir}/gksu.desktop
-%{_mandir}/man1/*.1*
-%{_pixmapsdir}/*.png
+%{_mandir}/man1/gksu.1*
+%{_mandir}/man1/gksudo.1*
+%{_pixmapsdir}/gksu-icon.png
+%{_pixmapsdir}/gksu-root-terminal.png
 %dir %{_datadir}/gksu
 %attr(755,root,root) %{_datadir}/gksu/gksu-migrate-conf.sh
 
